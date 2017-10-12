@@ -1,6 +1,7 @@
 from datetime import *
 from academia import models
 from academia import db
+from sqlalchemy import and_
 
 
 
@@ -15,17 +16,9 @@ id_logado = 0
 
 
 #inserções
-def inserirUsuarioCliente(nome,dataNascimento,cpf,rg,rua,numero,bairro,cidade,estado,email,senha):
+def inserirUsuario(nome,dataNascimento,cpf,rg,rua,numero,bairro,cidade,estado,email,senha, tipo):
 	#cria novo e passa os dados
-	novoUsuario = models.Usuario(nome,dataNascimento,cpf,rg,rua,numero,bairro,cidade,estado,email,senha,'cliente')
-	#adiciona ao banco
-	db.session.add(novoUsuario)
-	#realiza a ação
-	db.session.commit()
-
-def inserirUsuarioAdmin(nome,dataNascimento,cpf,rg,rua,numero,bairro,cidade,estado,email,senha):
-	#cria novo e passa os dados
-	novoUsuario = models.Usuario(nome,dataNascimento,cpf,rg,rua,numero,bairro,cidade,estado,email,senha,'admin')
+	novoUsuario = models.Usuario(nome,dataNascimento,cpf,rg,rua,numero,bairro,cidade,estado,email,senha, tipo)
 	#adiciona ao banco
 	db.session.add(novoUsuario)
 	#realiza a ação
@@ -49,6 +42,7 @@ def inserirPlano(nome,descricao,valor,validade):
 	db.session.commit()
 
 def inserirPlanosAcademia(academia, plano):
+
 	#adiciona plano em academia(nas referencias)
 	academia.planos.append(plano)
 	#realiza ação
@@ -221,6 +215,7 @@ def excluirPlano(plano):
 		db.session.commit()
 
 
+
 #É o unico que não interfere em relacionamentos ao ser excluido
 def excluirInscricao(inscricao,usuario,academia,plano): 
 
@@ -253,4 +248,54 @@ def adicionarVencimento(validade):
 	atual = date.today()
 	#retorna data atual mais a validade(dias), gerando a data de vencimento da inscricao
 	return atual + timedelta(validade)
+
 	
+# utilizado no login, verifica se os dados inseridos pertecem a algum usuario
+def existeUsuario(email,senha):
+
+	usuario = models.Usuario.query.filter(and_(models.Usuario.Email == email , models.Usuario.Senha == senha)).first()
+
+	return usuario
+
+
+def recebeAcademias():
+
+	academias = models.Academia.query.all()
+
+	return academias
+
+def recebePlanos():
+
+	planos = models.Plano.query.all()
+
+	return planos
+
+def recebeUsuarios():
+
+	usuarios = models.Usuario.query.all()
+
+	return usuarios
+
+#retorna uma lista com todos os planos que nao estão relacionados com academia
+def planosForaAcademia(academia, planos):
+
+	novo_plano = list()
+	
+
+	for p in planos:
+
+		conf = 0
+
+		for ap in academia.planos:
+
+			if p.idPlano == ap.idPlano:
+				conf += 1
+
+
+		if conf == 0:
+			novo_plano.append(p)
+
+
+
+	return novo_plano
+

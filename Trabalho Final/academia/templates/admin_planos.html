@@ -23,7 +23,7 @@
         <div class="col-md-12"> </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12"> 
           <table class="table">
             <thead>
               <tr>
@@ -36,23 +36,27 @@
                 <th>Excluir</th>
               </tr>
             </thead>
+
+            {%for a in listaPlano%}
             <tbody>
               <tr>
-                <td>1</td>
-                <td>Iniciação</td>
-                <td>Esse plano é um plano indicado para iniciantes</td>
-                <td>50 reais</td>
-                <td>90 dias</td>
+                <td>{{listaPlano[loop.index-1].idPlano}}</td>
+                <td>{{listaPlano[loop.index-1].Nome}}</td>
+                <td>{{listaPlano[loop.index-1].Descricao}}</td>
+                <td>{{listaPlano[loop.index-1].Valor}}</td>
+                <td>{{listaPlano[loop.index-1].Validade}} Dias</td>
                 <td>
-                  <a href="{{url_for('editar_plano')}}">
+                  <a href="/planos/editar/{{listaPlano[loop.index-1].idPlano}}">
                     <img src="..\static\img\imagem-editar.jpg" height="50" width="50"> </a>
                 </td>
                 <td>
-                  <a href="{{url_for('excluir_plano')}}">
+                  <a href="/planos/excluir/{{listaPlano[loop.index-1].idPlano}}">
                     <img src="..\static\img\imagem-excluir.jpg" height="50" width="50"> </a>
                 </td>
               </tr>
             </tbody>
+            
+            {% endfor %}
           </table>
           <div class="row">
             <div class="col-md-12">

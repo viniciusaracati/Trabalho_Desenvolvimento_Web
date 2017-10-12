@@ -7,15 +7,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://pingendo.com/assets/bootstrap/bootstrap-4.0.0-beta.1.css" type="text/css"> </head>
 
-<body> {% extends "layout_normal.html" %} {% block conteudo %}
+<body> {% extends "layout_admin.html" %} {% block conteudo %}
   <div class="py-5">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="display-1 text-center">Planos - Academia</h1>
-          <br>
-          <br>
-          <h1 class="display-5 text-center">Academia: {{academia.Nome}}</h1>
+          <h1 class="display-1 text-center">Inscrições</h1>
         </div>
       </div>
     </div>
@@ -30,33 +27,36 @@
           <table class="table">
             <thead>
               <tr>
-                <th>Codigo</th>
-                <th>Nome</th>
-                <th>Descricao</th>
-                <th>Valor</th>
-                <th>Validade</th>
+                <th>Codigo Inscrição</th>
+                <th>Codigo Academia</th>
+                <th>Nome Academia</th>
+                <th>Codigo Usuario</th>
+                <th>Nome Usuário</th>
+                <th>Codigo Plano</th>
+                <th>Nome Plano</th>                
+                <th>Validade Plano</th>
+                <th>Vencimento da Inscrição</th>                
               </tr>
             </thead>
 
-            {%for a in planos%}
+            {%for a in listaMatricula%}
             <tbody>
               <tr>
-                <td>{{planos[loop.index-1].idPlanos}}</td>
-                <td>{{planos[loop.index-1].Nome}}</td>
-                <td>{{planos[loop.index-1].Descricao}}</td>
-                <td>{{planos[loop.index-1].Valor}}</td>
-                <td>{{planos[loop.index-1].Validade}} Dias</td>
+                <td>{{listaMatricula[loop.index-1][0]}}</td>
+                <td>{{listaMatricula[loop.index-1][1]}}</td>
+                <td>{{listaMatricula[loop.index-1][2]}}</td>
+                <td>{{listaMatricula[loop.index-1][3]}}</td>
+                <td>{{listaMatricula[loop.index-1][4]}}</td>
+                <td>{{listaMatricula[loop.index-1][5]}}</td>
+                <td>{{listaMatricula[loop.index-1][6]}}</td>
+                <td>{{listaMatricula[loop.index-1][7]}}</td>
+                <td>{{listaMatricula[loop.index-1][8]}}</td>
+                <td>{{listaMatricula[loop.index-1][9]}}</td>
               </tr>
             </tbody>
             {% endfor %}
 
-          </table>
-          <div class="row">
-            <div class="col-md-12">
-              <br>
-              <a class="btn btn-primary" href="{{url_for('academias')}}">Voltar</a>
-            </div>
-          </div>
+          </table>          
         </div>
       </div>
     </div>

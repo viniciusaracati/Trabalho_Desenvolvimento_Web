@@ -12,11 +12,11 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="display-1 text-center">Planos - Academia</h1>
+          <h1 class="display-1 text-center">Matricula(Planos da Academia)</h1>
           <br>
           <br>
           <br>
-          <h1 class="display-5 text-center">Academia: Nome da Academia</h1>
+          <h1 class="display-5 text-center">Academia: {{academia.Nome}}</h1>
         </div>
       </div>
     </div>
@@ -36,22 +36,26 @@
                 <th>Descricao</th>
                 <th>Valor</th>
                 <th>Validade</th>
-                <th>Selecionar</th>
+                <th>Matricular</th>
               </tr>
             </thead>
+
+            {%for a in planos%}
             <tbody>
               <tr>
-                <td>1</td>
-                <td>Iniciação</td>
-                <td>Esse plano é um plano indicado para iniciantes</td>
-                <td>50 reais</td>
-                <td>90 dias</td>
+                <td>{{planos[loop.index-1].idPlano}}</td>
+                <td>{{planos[loop.index-1].Nome}}</td>
+                <td>{{planos[loop.index-1].Descricao}}</td>
+                <td>{{planos[loop.index-1].Valor}}</td>
+                <td>{{planos[loop.index-1].Validade}} Dias</td>
                 <td>
-                  <a href="#">
+                  <a href="/matricula/executamatricula/{{academia.idAcademia}}/{{planos[loop.index-1].idPlano}}">
                     <img src="..\static\img\check.png" height="50" width="50"> </a>
                 </td>
               </tr>
             </tbody>
+            {% endfor %}
+
           </table>
           <div class="row">
             <div class="col-md-12">

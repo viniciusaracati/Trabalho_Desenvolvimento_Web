@@ -39,23 +39,27 @@
                 <th>Selecionar</th>
               </tr>
             </thead>
+
+            {%for a in listaAcademia%}
             <tbody>
               <tr>
-                <td>1</td>
-                <td>musculo total</td>
-                <td>11111111-0001</td>
-                <td>Rua barao de messejana</td>
-                <td>90</td>
-                <td>Centro</td>
-                <td>Aracati</td>
-                <td>Ceará</td>
-                <td>musculototal@gmail.com</td>
+                <td>{{listaAcademia[loop.index-1].idAcademia}}</td>
+                <td>{{listaAcademia[loop.index-1].Nome}}</td>
+                <td>{{listaAcademia[loop.index-1].Cnpj}}</td>
+                <td>{{listaAcademia[loop.index-1].Rua}}</td>
+                <td>{{listaAcademia[loop.index-1].Numero}}</td>
+                <td>{{listaAcademia[loop.index-1].Bairro}}</td>
+                <td>{{listaAcademia[loop.index-1].Cidade}}</td>
+                <td>{{listaAcademia[loop.index-1].Estado}}</td>
+                <td>{{listaAcademia[loop.index-1].Email}}</td>
                 <td>
-                  <a href="{{url_for('mostra_planos_academia')}}">
+                  <a href="/academias/planos/{{listaAcademia[loop.index-1].idAcademia}}">
                     <img src="..\static\img\check.png" height="50" width="50"> </a>
                 </td>
               </tr>
             </tbody>
+            {% endfor %}
+            
           </table>
           <div class="row">
             <div class="col-md-12">

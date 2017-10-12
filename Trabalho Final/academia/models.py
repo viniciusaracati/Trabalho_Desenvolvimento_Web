@@ -1,6 +1,7 @@
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from academia import db
+from sqlalchemy import and_
 
 class Usuario(db.Model):
 	idUsuario = db.Column(db.Integer, primary_key = True)

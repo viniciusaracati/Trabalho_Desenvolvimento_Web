@@ -30,8 +30,8 @@
                 <th>Codigo</th>
                 <th>Nome</th>
                 <th>Data Nasc</th>
-                <th>RG</th>
                 <th>CPF</th>
+                <th>RG</th>                
                 <th>Rua</th>
                 <th>Numero</th>
                 <th>Bairro</th>
@@ -39,34 +39,40 @@
                 <th>Estado</th>
                 <th>E-mail</th>
                 <th>Senha</th>
+                <th>Tipo</th>
                 <th>Editar</th>
                 <th>Excluir</th>
               </tr>
             </thead>
+
+            {%for a in listaUsuario%}
             <tbody>
               <tr>
-                <td>1</td>
-                <td>jose</td>
-                <td>11/11/2017</td>
-                <td>222222222222</td>
-                <td>333.333.333-33</td>
-                <td>Rua barao de messejana</td>
-                <td>90</td>
-                <td>Centro</td>
-                <td>Aracati</td>
-                <td>Ceará</td>
-                <td>jose@gmail.com</td>
-                <td>123456</td>
+                <td>{{listaUsuario[loop.index-1].idUsuario}}</td>
+                <td>{{listaUsuario[loop.index-1].Nome}}</td>
+                <td>{{listaUsuario[loop.index-1].DataNascimento}}</td>
+                <td>{{listaUsuario[loop.index-1].Cpf}}</td>
+                <td>{{listaUsuario[loop.index-1].Rg}}</td>
+                <td>{{listaUsuario[loop.index-1].Rua}}</td>
+                <td>{{listaUsuario[loop.index-1].Numero}}</td>
+                <td>{{listaUsuario[loop.index-1].Bairro}}</td>
+                <td>{{listaUsuario[loop.index-1].Cidade}}</td>
+                <td>{{listaUsuario[loop.index-1].Estado}}</td>
+                <td>{{listaUsuario[loop.index-1].Email}}</td>
+                <td>{{listaUsuario[loop.index-1].Senha}}</td>
+                <td>{{listaUsuario[loop.index-1].Tipo}}</td>
                 <td>
-                  <a href="{{url_for('editar_usuario')}}">
+                  <a href="/usuarios/editar/{{listaUsuario[loop.index-1].idUsuario}}">
                     <img src="..\static\img\imagem-editar.jpg" height="50" width="50"> </a>
                 </td>
                 <td>
-                  <a href="{{url_for('excluir_usuario')}}">
+                  <a href="/usuarios/excluir/{{listaUsuario[loop.index-1].idUsuario}}">
                     <img src="..\static\img\imagem-excluir.jpg" height="50" width="50"> </a>
                 </td>
               </tr>
             </tbody>
+            {% endfor %}
+
           </table>
           <div class="row">
             <div class="col-md-12">

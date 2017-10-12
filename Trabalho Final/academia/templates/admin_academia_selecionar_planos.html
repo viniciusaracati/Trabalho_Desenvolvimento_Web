@@ -35,24 +35,29 @@
                 <th>Selecionar</th>
               </tr>
             </thead>
+
+            {%for a in planos%}
             <tbody>
               <tr>
-                <td>1</td>
-                <td>Iniciação</td>
-                <td>Esse plano é um plano indicado para iniciantes</td>
-                <td>50 reais</td>
-                <td>90 dias</td>
+                <td>{{planos[loop.index-1].idPlano}}</td>
+                <td>{{planos[loop.index-1].Nome}}</td>
+                <td>{{planos[loop.index-1].Descricao}}</td>
+                <td>{{planos[loop.index-1].Valor}}</td>
+                <td>{{planos[loop.index-1].Validade}} Dias</td>
                 <td>
-                  <a href="{{url_for('excluir_plano')}}">
+                  <a href="/academias/selecionar_planos_executar/{{academia.idAcademia}}/{{planos[loop.index-1].idPlano}}">
                     <img src="..\static\img\imagem-adicionar.jpg" height="50" width="50"> </a>
                 </td>
               </tr>
             </tbody>
+            {% endfor %}
+
+
           </table>
           <div class="row">
             <div class="col-md-12">
               <br>
-              <a class="btn btn-primary" href="{{url_for('gerenciar_planos_academia')}}">Voltar</a>
+              <a class="btn btn-primary" href="/academias/gerenciar_planos/{{academia.idAcademia}}">Voltar</a>
             </div>
           </div>
         </div>
