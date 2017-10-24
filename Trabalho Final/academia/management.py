@@ -7,8 +7,8 @@ from sqlalchemy import and_
 
 #Variavel local
 
-usuario_logado = 'Admin'
-usuario_tipo = 'admin'
+usuario_logado = 'Visitante'
+usuario_tipo = 'cliente'
 id_logado = 0
 
 
